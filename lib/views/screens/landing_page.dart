@@ -34,6 +34,18 @@ class _LandingPageState extends State<LandingPage> {
     });
   }
 
+  void _nextPage() {
+    if (_currentIndex < images.length - 1) {
+      _pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      // Navigate to the home/authentication screen
+      Navigator.pushReplacementNamed(context, "/auth");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +58,6 @@ class _LandingPageState extends State<LandingPage> {
           ),
           Column(
             children: [
-              // Logo at the top of the screen
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 30.0),
                 child: Image.asset(
@@ -62,93 +73,91 @@ class _LandingPageState extends State<LandingPage> {
                   onPageChanged: _onPageChanged,
                   itemCount: images.length,
                   itemBuilder: (context, index) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Image.asset(
-                            images[index],
-                            width: 361,
-                            height: 308,
-                            fit: BoxFit.cover,
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: Image.asset(
+                              images[index],
+                              width: 361,
+                              height: 308,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                titles[index],
-                                style: const TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF641D15),
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                subtexts[index],
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ],
+                          const SizedBox(height: 24),
+                          Text(
+                            titles[index],
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF641D15),
+                            ),
                           ),
-                        ),
-                        if (index < images.length - 1) const SizedBox(height: 60),
-                      ],
+                          const SizedBox(height: 12),
+                          Text(
+                            subtexts[index],
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black,
+                              height: 1.5,
+                            ),
+                          ),
+                          if (index < images.length - 1) const SizedBox(height: 40),
+                        ],
+                      ),
                     );
                   },
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SmoothPageIndicator(
-                  controller: _pageController,
-                  count: images.length,
-                  effect: const WormEffect(
-                    dotWidth: 10.0,
-                    dotHeight: 10.0,
-                    spacing: 16.0,
-                    radius: 10.0,
-                    dotColor: Colors.grey,
-                    activeDotColor: Color(0xFF641D15),
-                  ),
-                ),
-              ),
-              if (_currentIndex == images.length - 1)
-                Column(
+                padding: const EdgeInsets.only(left: 24.0, right: 24.0, bottom: 50.0), // Moved slightly higher
+                child: Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(const Color(0xFFF6CDCD)),
-                          foregroundColor: MaterialStateProperty.all(Colors.black),
-                          padding: MaterialStateProperty.all(
-                            const EdgeInsets.symmetric(vertical: 15.0, horizontal: 40.0),
-                          ),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
+                    SmoothPageIndicator(
+                      controller: _pageController,
+                      count: images.length,
+                      effect: ExpandingDotsEffect(
+                        dotWidth: 12.0,
+                        dotHeight: 12.0,
+                        expansionFactor: 1.6,
+                        spacing: 8.0,
+                        radius: 10.0,
+                        dotColor: Colors.grey,
+                        activeDotColor: const Color(0xFFF6CDCD),
+                      ),
+                    ),
+                    const Spacer(),
+                    GestureDetector(
+                      onTap: _nextPage,
+                      child: Container(
+                        width: _currentIndex == images.length - 1 ? 150 : 60, // Wider for "Get Started"
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF6CDCD),
+                          borderRadius: BorderRadius.circular(30), // Rounded
                         ),
-                        onPressed: () {
-                          // Navigate to authentication screen or next screen
-                        },
-                        child: const Text(
-                          "Get Started",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        child: Center(
+                          child: _currentIndex == images.length - 1
+                              ? const Text(
+                            "Get Started",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          )
+                              : const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 28),
                         ),
                       ),
                     ),
                   ],
                 ),
+              ),
             ],
           ),
         ],
