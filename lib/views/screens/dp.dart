@@ -20,7 +20,7 @@ class _DpScreenState extends State<DpScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/background3.png'), // Add the image for background
+            image: AssetImage('assets/images/background3.png'), // Add the image for background
             fit: BoxFit.cover,
           ),
         ),
@@ -32,7 +32,7 @@ class _DpScreenState extends State<DpScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Data privacy image
-                Image.asset('assets/dataprivacy.png'), // Add the image for data privacy
+                Image.asset('assets/images/dataprivacy.png'), // Add the image for data privacy
 
                 const SizedBox(height: 20),
 

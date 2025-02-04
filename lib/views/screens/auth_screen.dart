@@ -12,7 +12,7 @@ class AuthScreen extends StatelessWidget {
         children: [
           // Background Image
           Image.asset(
-            'assets/background2.png',
+            'assets/images/background2.png',
             width: double.infinity,
             height: double.infinity,
             fit: BoxFit.cover,
@@ -28,7 +28,7 @@ class AuthScreen extends StatelessWidget {
                   const SizedBox(height: 60),
                   // Image
                   Image.asset(
-                    'assets/auth_image.png',
+                    'assets/images/auth_image.png',
                     height: 300,
                     fit: BoxFit.contain,
                   ),

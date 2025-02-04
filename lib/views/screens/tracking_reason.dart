@@ -31,7 +31,7 @@ class _TrackingReasonScreenState extends State<TrackingReasonScreen> {
           // Background Image
           Positioned.fill(
             child: Image.asset(
-              'assets/background5.png', // Make sure the background3.png is in the assets folder
+              'assets/images/background5.png', // Make sure the background3.png is in the assets folder
               fit: BoxFit.cover,
             ),
           ),

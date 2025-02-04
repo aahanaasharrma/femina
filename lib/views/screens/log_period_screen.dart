@@ -11,7 +11,7 @@ class LogPeriodScreen extends StatelessWidget {
           // Background Image
           Positioned.fill(
             child: Image.asset(
-              'assets/background6.png', // Ensure the background6.png is in the assets folder
+              'assets/images/background6.png', // Ensure the background6.png is in the assets folder
               fit: BoxFit.cover,
             ),
           ),
@@ -24,7 +24,7 @@ class LogPeriodScreen extends StatelessWidget {
                 // Image
                 Center(
                   child: Image.asset(
-                    'assets/image4.png', // Make sure the image is present in the assets folder
+                    'assets/images/image4.png', // Make sure the image is present in the assets folder
                     width: 361,
                     height: 331,
                   ),

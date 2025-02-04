@@ -48,7 +48,7 @@ class _DOBScreenState extends State<DOBScreen> {
           // Background Image
           Positioned.fill(
             child: Image.asset(
-              'assets/background5.png',
+              'assets/images/background5.png',
               fit: BoxFit.cover,
             ),
           ),

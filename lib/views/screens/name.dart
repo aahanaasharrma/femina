@@ -20,7 +20,7 @@ class _NameScreenState extends State<NameScreen> {
           // Background Image
           Positioned.fill(
             child: Image.asset(
-              'assets/background4.png', // Ensure this is in assets and pubspec.yaml
+              'assets/images/background4.png', // Ensure this is in assets and pubspec.yaml
               fit: BoxFit.cover,
             ),
           ),
