@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'calendar1.dart';
 
 class LogPeriodScreen extends StatelessWidget {
   const LogPeriodScreen({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class LogPeriodScreen extends StatelessWidget {
           // Background Image
           Positioned.fill(
             child: Image.asset(
-              'assets/images/background6.png', // Ensure the background6.png is in the assets folder
+              'assets/background6.png', // Ensure the background6.png is in the assets folder
               fit: BoxFit.cover,
             ),
           ),
@@ -24,7 +25,7 @@ class LogPeriodScreen extends StatelessWidget {
                 // Image
                 Center(
                   child: Image.asset(
-                    'assets/images/image4.png', // Make sure the image is present in the assets folder
+                    'assets/image4.png', // Make sure the image is present in the assets folder
                     width: 361,
                     height: 331,
                   ),
@@ -57,9 +58,11 @@ class LogPeriodScreen extends StatelessWidget {
                 // Add Dates Button
                 Center(
                   child: ElevatedButton(
-                    onPressed: () {
-                      // TODO: Navigate to the next screen when the button is pressed
-                    },
+                    onPressed: () { Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Calendar1Screen()),
+                      );
+                      },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFD55454),
                       foregroundColor: Colors.white,
