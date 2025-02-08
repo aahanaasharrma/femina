@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'name.dart';
+import 'userdetails_name_page.dart';
 
 class ConsentPage extends StatefulWidget {
   const ConsentPage({Key? key}) : super(key: key);
@@ -111,7 +111,7 @@ class _ConsentPageState extends State<ConsentPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const NameScreen(),
+                        builder: (context) => const UserDetailsNamePage(),
                       ),
                     );
                   }

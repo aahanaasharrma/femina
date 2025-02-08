@@ -10,7 +10,7 @@ class _Calendar1ScreenState extends State<Calendar1Screen> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   List<DateTime> _highlightedDays = [];
-  int _numDays = 0; // Counter for selecting number of days
+  int _numDays = 0;
 
   void _updateDays(int change) {
     setState(() {
