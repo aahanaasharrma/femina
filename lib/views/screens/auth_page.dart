@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart'; // Import LoginScreen
-import 'singup_page.dart'; // Import RegisterScreen
+import 'signup_page.dart'; // Import RegisterScreen
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});

@@ -1,4 +1,4 @@
-import 'package:femina/views/screens/singup_page.dart';
+import 'package:femina/views/screens/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'dp.dart'; // Ensure you import the DpScreen correctly
 
