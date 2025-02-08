@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'tracking_reason.dart';
+import 'package:intl/intl.dart'; // For formatting dates
 
 class DOBScreen extends StatefulWidget {
   const DOBScreen({Key? key}) : super(key: key);
@@ -20,24 +21,48 @@ class _DOBScreenState extends State<DOBScreen> {
   // Function to validate inputs
   bool _validateInputs() {
     setState(() {
-      _dobError = _validateDOB(_dobController.text) ? null : '* The information entered is in the wrong format.';
-      _weightError = _validateNumber(_weightController.text) ? null : '* The information entered is in the wrong format.';
-      _heightError = _validateNumber(_heightController.text) ? null : '* The information entered is in the wrong format.';
+      if (_dobController.text.isEmpty) {
+        _dobError = '* Date of Birth is required.';
+      } else {
+        _dobError = null;
+      }
+
+      if (_weightController.text.isEmpty) {
+        _weightError = '* Weight is required.';
+      } else {
+        _weightError = _validateNumber(_weightController.text) ? null : '* Invalid format.';
+      }
+
+      if (_heightController.text.isEmpty) {
+        _heightError = '* Height is required.';
+      } else {
+        _heightError = _validateNumber(_heightController.text) ? null : '* Invalid format.';
+      }
     });
 
     return _dobError == null && _weightError == null && _heightError == null;
-  }
-
-  // Validate Date of Birth Format (DD/MM/YYYY)
-  bool _validateDOB(String dob) {
-    final RegExp dobRegex = RegExp(r'^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$');
-    return dobRegex.hasMatch(dob);
   }
 
   // Validate Numeric Input for Weight & Height
   bool _validateNumber(String input) {
     final RegExp numRegex = RegExp(r'^[0-9]+(\.[0-9]{1,2})?$'); // Allows up to two decimal places
     return numRegex.hasMatch(input);
+  }
+
+  // Show Date Picker and update the TextField
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime(2000, 1, 1), // Default selection
+      firstDate: DateTime(1900), // Earliest date
+      lastDate: DateTime.now(), // Can't pick a future date
+    );
+
+    if (picked != null) {
+      setState(() {
+        _dobController.text = DateFormat('dd/MM/yyyy').format(picked); // Format date
+      });
+    }
   }
 
   @override
@@ -58,7 +83,6 @@ class _DOBScreenState extends State<DOBScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Back Button with GestureDetector
                   GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
@@ -75,8 +99,8 @@ class _DOBScreenState extends State<DOBScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20), // Space between the back button and the title
-                  
+                  const SizedBox(height: 20),
+
                   // Title
                   const Text(
                     'What is your date of birth?',
@@ -87,6 +111,7 @@ class _DOBScreenState extends State<DOBScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
+
                   // Subtitle
                   const Text(
                     'This will help in our predictions.',
@@ -96,7 +121,8 @@ class _DOBScreenState extends State<DOBScreen> {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  // Date of Birth Input
+
+                  // Date of Birth Input (with Date Picker)
                   const Text(
                     'Date of Birth',
                     style: TextStyle(
@@ -108,24 +134,27 @@ class _DOBScreenState extends State<DOBScreen> {
                   const SizedBox(height: 8),
                   TextField(
                     controller: _dobController,
+                    readOnly: true, // Prevent manual input
+                    onTap: () => _selectDate(context),
                     decoration: InputDecoration(
-                      hintText: 'DD/MM/YYYY',
-                      hintStyle: const TextStyle(color: Color(0xFF89939E)),
+                      hintText: 'Select your date of birth',
+                      suffixIcon: const Icon(Icons.calendar_today, color: Colors.grey),
                       filled: true,
                       fillColor: Colors.white,
+                      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: Color(0xFFE7EAEB)),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Color(0xFFE7EAEB)),
+                        borderSide: const BorderSide(color: Colors.blueAccent),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       errorText: _dobError,
                     ),
-                    keyboardType: TextInputType.datetime,
                   ),
                   const SizedBox(height: 20),
+
                   // Weight Input
                   const Text(
                     'Weight (in kgs)',
@@ -139,14 +168,16 @@ class _DOBScreenState extends State<DOBScreen> {
                   TextField(
                     controller: _weightController,
                     decoration: InputDecoration(
+                      hintText: 'Enter your weight (kg)',
                       filled: true,
                       fillColor: Colors.white,
+                      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: Color(0xFFE7EAEB)),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Color(0xFFE7EAEB)),
+                        borderSide: const BorderSide(color: Colors.blueAccent),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       errorText: _weightError,
@@ -154,6 +185,7 @@ class _DOBScreenState extends State<DOBScreen> {
                     keyboardType: TextInputType.number,
                   ),
                   const SizedBox(height: 20),
+
                   // Height Input
                   const Text(
                     'Height (in cms)',
@@ -167,14 +199,16 @@ class _DOBScreenState extends State<DOBScreen> {
                   TextField(
                     controller: _heightController,
                     decoration: InputDecoration(
+                      hintText: 'Enter your height (cm)',
                       filled: true,
                       fillColor: Colors.white,
+                      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: Color(0xFFE7EAEB)),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Color(0xFFE7EAEB)),
+                        borderSide: const BorderSide(color: Colors.blueAccent),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       errorText: _heightError,
@@ -182,31 +216,7 @@ class _DOBScreenState extends State<DOBScreen> {
                     keyboardType: TextInputType.number,
                   ),
                   const SizedBox(height: 30),
-                  // Terms and Conditions
-                  RichText(
-                    text: const TextSpan(
-                      style: TextStyle(fontSize: 14, color: Colors.black),
-                      children: [
-                        TextSpan(text: 'By registering, you agree to our '),
-                        TextSpan(
-                          text: 'Terms of use',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFFD55454),
-                          ),
-                        ),
-                        TextSpan(text: ' and '),
-                        TextSpan(
-                          text: 'Privacy Policies',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFFD55454),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 30),
+
                   // Next Button
                   Center(
                     child: ElevatedButton(
@@ -236,7 +246,7 @@ class _DOBScreenState extends State<DOBScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 40), // Extra space for scrolling
+                  const SizedBox(height: 40),
                 ],
               ),
             ),
