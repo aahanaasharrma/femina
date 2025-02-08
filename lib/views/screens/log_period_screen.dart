@@ -9,30 +9,30 @@ class LogPeriodScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Image
+          // **Background Image**
           Positioned.fill(
             child: Image.asset(
-              'assets/background6.png', // Ensure the background6.png is in the assets folder
+              'assets/images/background6.png',
               fit: BoxFit.cover,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 50.0), // Padding for content
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 50.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center, // Center content vertically
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Image
+                // **Image**
                 Center(
                   child: Image.asset(
-                    'assets/image4.png', // Make sure the image is present in the assets folder
+                    'assets/images/image4.png',
                     width: 361,
                     height: 331,
                   ),
                 ),
-                const SizedBox(height: 30), // Space after the image
+                const SizedBox(height: 30),
 
-                // Heading
+                // **Heading**
                 const Text(
                   'Log your periods to get accurate predictions',
                   style: TextStyle(
@@ -42,9 +42,9 @@ class LogPeriodScreen extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 10), // Space after heading
+                const SizedBox(height: 10),
 
-                // Description
+                // **Description**
                 const Text(
                   'We will try to accurately predict your next period.',
                   style: TextStyle(
@@ -53,22 +53,23 @@ class LogPeriodScreen extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const Spacer(), // Pushes the button to the bottom
+                const Spacer(),
 
-                // Add Dates Button
+                // **Add Dates Button**
                 Center(
                   child: ElevatedButton(
-                    onPressed: () { Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Calendar1Screen()),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Calendar1Screen()),
                       );
-                      },
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFD55454),
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 80),
+                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal:60),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(20),
                       ),
                     ),
                     child: const Text(
@@ -77,7 +78,25 @@ class LogPeriodScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 20),
+
+                // **Skip for Now Button**
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Calendar1Screen()),
+                    );
+                  },
+                  child: const Text(
+                    'Skip for Now',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
               ],
             ),
           ),
