@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dp.dart';
+import 'consent_page.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -154,7 +154,7 @@ class _SignupPageState extends State<SignupPage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const DpScreen()),
+                      MaterialPageRoute(builder: (context) => const ConsentPage()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -204,8 +204,7 @@ class _SignupPageState extends State<SignupPage> {
                   ],
                 ),
               ),
-
-              const SizedBox(height: 130),
+              const SizedBox(height: 140),
 
               // Already have an account? Login now (Positioned Higher)
               Padding(
@@ -218,7 +217,7 @@ class _SignupPageState extends State<SignupPage> {
                     child: const Text.rich(
                       TextSpan(
                         text: "Already have an account? ",
-                        style: TextStyle(color: Colors.black54, fontSize: 16),
+                        style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),
                         children: [
                           TextSpan(
                             text: "Login now",

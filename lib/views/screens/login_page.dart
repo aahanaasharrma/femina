@@ -1,6 +1,6 @@
 import 'package:femina/views/screens/signup_page.dart';
 import 'package:flutter/material.dart';
-import 'dp.dart'; // Ensure you import the DpScreen correctly
+import 'consent_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -108,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const DpScreen()),
+                            MaterialPageRoute(builder: (context) => const ConsentPage()),
                           );
                         },
                         style: ElevatedButton.styleFrom(
