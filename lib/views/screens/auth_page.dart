@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'login_screen.dart'; // Import LoginScreen
-import 'register_screen.dart'; // Import RegisterScreen
+import 'login_page.dart'; // Import LoginScreen
+import 'singup_page.dart'; // Import RegisterScreen
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -60,7 +60,7 @@ class AuthPage extends StatelessWidget {
                       // Navigate to the Login screen
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const LoginScreen()),
+                        MaterialPageRoute(builder: (context) => const LoginPage()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -86,7 +86,7 @@ class AuthPage extends StatelessWidget {
                       // Navigate to the Register screen
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                        MaterialPageRoute(builder: (context) => const SignupPage()),
                       );
                     },
                     style: OutlinedButton.styleFrom(
