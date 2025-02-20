@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.landing, // Start at the landing page
-      onGenerateRoute: AppRoutes.generateRoute, // Use routes for navigation
+      initialRoute: AppRoutes.initial,
+      onGenerateRoute: AppRoutes.generateRoute,
       theme: ThemeData(
         fontFamily: 'Montserrat',
         colorScheme: ColorScheme.fromSeed(
